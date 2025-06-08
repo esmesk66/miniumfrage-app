@@ -1,0 +1,18 @@
+<h1>Was ist dein Lieblingsfach?</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for fach in fächer %}
+        <input type="radio" name="fach" value="{{ fach }}" required> {{ fach }}<br>
+    {% endfor %}
+    <button type="submit">Abstimmen</button>
+</form>
+
+<h2>Ergebnisse:</h2>
+<ul>
+    {% for stimme in stimmen %}
+        <li>{{ stimme.fach }} ({{ stimme.abgegeben_am|date:"d.m.Y H:i" }})</li>
+    {% empty %}
+        <li>Noch keine Stimmen.</li>
+    {% endfor %}
+</ul>
+
